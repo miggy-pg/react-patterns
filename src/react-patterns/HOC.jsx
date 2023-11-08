@@ -1,6 +1,8 @@
 import { useState } from "react";
 
+// HOC components should start with "with"
 export default function withToggles(WrappedComponent) {
+  // HOC should only return one component
   return function List(props) {
     const [isOpen, setIsOpen] = useState(true);
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -20,6 +22,8 @@ export default function withToggles(WrappedComponent) {
             {isOpen ? <span>&or;</span> : <span>&and;</span>}
           </button>
         </div>
+        {/* what's special about this returned component is the passed 'WrappedComponent' is passed
+         with spread props*/}
         {isOpen && <WrappedComponent {...props} items={displayItems} />}
 
         <button onClick={() => setIsCollapsed((isCollapsed) => !isCollapsed)}>
